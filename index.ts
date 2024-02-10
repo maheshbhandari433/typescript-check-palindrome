@@ -6,25 +6,29 @@ function isPalindrome(input: string): boolean {
     return cleanInput === cleanInput.split('').reverse().join('');
 }
 
-function runPalindromeChecker() {
-    const inputString = prompt("Enter a string to check if it's a palindrome:");
+function runPalindromeChecker(): boolean {
+    const inputField = document.getElementById('inputString') as HTMLInputElement;
+    const outputDiv = document.getElementById('output');
 
-    if (inputString !== null) {
-        if (inputString.trim() === '') {
-            alert("No input provided.");
-        } else {
-            const result = isPalindrome(inputString);
-            if (result) {
-                alert(`${inputString} is a palindrome!`);
-            } else {
-                alert(`${inputString} is not a palindrome.`);
-            }
-        }
-    } else {
-        alert("No input provided.");
+    if (outputDiv === null) {
+        console.error("Output div element not found.");
+        return false; // Prevent form submission
     }
+
+    const inputString = inputField.value.trim();
+
+    if (inputString === '') {
+        outputDiv.innerHTML = '<p>Please enter a string.</p>';
+        return false; // Prevent form submission
+    }
+
+    const result = isPalindrome(inputString);
+    if (result) {
+        outputDiv.innerHTML = `<p>"${inputString}" is a palindrome!</p>`;
+    } else {
+        outputDiv.innerHTML = `<p>"${inputString}" is not a palindrome.</p>`;
+    }
+
+    inputField.value = ''; // Clear the input field
+    return false; // Prevent form submission
 }
-
-
-// Run the app
-runPalindromeChecker();

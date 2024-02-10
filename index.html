@@ -6,7 +6,16 @@
     <title>Palindrome Checker</title>
 </head>
 <body>
-    <script src="index.js"></script>
-
+    <h1>Palindrome Checker</h1>
+    <form onsubmit="return runPalindromeChecker()">
+        <label for="inputString">Enter a string to check if it's a palindrome:</label><br>
+        <input type="text" id="inputString" name="inputString" required><br>
+        <button type="submit">Check Palindrome</button>
+    </form>
+    <div id="output"></div>
+    <script src="index.js">
+    </script>
 </body>
 </html>
+
+
