@@ -6,29 +6,28 @@ function isPalindrome(input: string): boolean {
     return cleanInput === cleanInput.split('').reverse().join('');
 }
 
-function runPalindromeChecker(): boolean {
-    const inputField = document.getElementById('inputString') as HTMLInputElement;
+document.getElementById('palindromeForm')?.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const inputString = (document.getElementById('inputString') as HTMLInputElement).value.trim();
     const outputDiv = document.getElementById('output');
 
     if (outputDiv === null) {
         console.error("Output div element not found.");
-        return false; // Prevent form submission
+        return;
     }
 
-    const inputString = inputField.value.trim();
-
     if (inputString === '') {
-        outputDiv.innerHTML = '<p>Please enter a string.</p>';
-        return false; // Prevent form submission
+        outputDiv.innerHTML = '<p class="text-danger">Please enter a string.</p>';
+        return;
     }
 
     const result = isPalindrome(inputString);
     if (result) {
-        outputDiv.innerHTML = `<p>"${inputString}" is a palindrome!</p>`;
+        outputDiv.innerHTML = `<p class="text-success">"${inputString}" is a palindrome!</p>`;
     } else {
-        outputDiv.innerHTML = `<p>"${inputString}" is not a palindrome.</p>`;
+        outputDiv.innerHTML = `<p class="text-danger">"${inputString}" is not a palindrome.</p>`;
     }
 
-    inputField.value = ''; // Clear the input field
-    return false; // Prevent form submission
-}
+    (document.getElementById('inputString') as HTMLInputElement).value = ''; // Clear the input field
+});

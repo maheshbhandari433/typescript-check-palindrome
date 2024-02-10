@@ -1,28 +1,28 @@
+var _a;
 function isPalindrome(input) {
     // Remove non-alphanumeric characters and convert to lowercase
     var cleanInput = input.toLowerCase().replace(/[^a-z0-9]/g, '');
     // Check if the cleanInput is equal to its reverse
     return cleanInput === cleanInput.split('').reverse().join('');
 }
-function runPalindromeChecker() {
-    var inputField = document.getElementById('inputString');
+(_a = document.getElementById('palindromeForm')) === null || _a === void 0 ? void 0 : _a.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var inputString = document.getElementById('inputString').value.trim();
     var outputDiv = document.getElementById('output');
     if (outputDiv === null) {
         console.error("Output div element not found.");
-        return false; // Prevent form submission
+        return;
     }
-    var inputString = inputField.value.trim();
     if (inputString === '') {
-        outputDiv.innerHTML = '<p>Please enter a string.</p>';
-        return false; // Prevent form submission
+        outputDiv.innerHTML = '<p class="text-danger">Please enter a string.</p>';
+        return;
     }
     var result = isPalindrome(inputString);
     if (result) {
-        outputDiv.innerHTML = "<p>\"".concat(inputString, "\" is a palindrome!</p>");
+        outputDiv.innerHTML = "<p class=\"text-success\">\"".concat(inputString, "\" is a palindrome!</p>");
     }
     else {
-        outputDiv.innerHTML = "<p>\"".concat(inputString, "\" is not a palindrome.</p>");
+        outputDiv.innerHTML = "<p class=\"text-danger\">\"".concat(inputString, "\" is not a palindrome.</p>");
     }
-    inputField.value = ''; // Clear the input field
-    return false; // Prevent form submission
-}
+    document.getElementById('inputString').value = ''; // Clear the input field
+});
